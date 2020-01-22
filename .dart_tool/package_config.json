@@ -56,6 +56,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "english_words",
+      "rootUri": "file:///home/randhir/Dashboard/Packages/flutter/.pub-cache/hosted/pub.dartlang.org/english_words-3.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "1.22"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///home/randhir/Dashboard/Packages/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -176,7 +182,7 @@
       "languageVersion": "2.1"
     }
   ],
-  "generated": "2020-01-22T05:46:33.309926Z",
+  "generated": "2020-01-22T07:26:25.842936Z",
   "generator": "pub",
   "generatorVersion": "2.7.0"
 }
