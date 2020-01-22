@@ -1,12 +1,17 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sample_app/login/login_screen.dart';
+import 'package:http/http.dart' show get;
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Welcome to Flutter', home: RandomWords());
+    return MaterialApp(
+        title: 'Welcome to Flutter',
+        theme: ThemeData(primaryColor: Colors.white),
+        home: LoginScreen());
   }
 }
 
@@ -55,6 +60,7 @@ class RandomWordsState extends State<RandomWords> {
         color: isFavorite ? Colors.red : null,
       ),
       onTap: () {
+        fetchData();
         setState(() {
           if (isFavorite) {
             _favorites.remove(wordPair);
@@ -90,6 +96,11 @@ class RandomWordsState extends State<RandomWords> {
         body: ListView(children: divided),
       );
     }));
+  }
+
+  void fetchData() async {
+    var result = await get('https://jsonplaceholder.typicode.com/photos');
+    print(result.body);
   }
 }
 
