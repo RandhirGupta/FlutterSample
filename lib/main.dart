@@ -1,6 +1,6 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sample_app/login/login_screen.dart';
+import 'package:flutter_sample_app/screens/user_name_screen.dart';
 import 'package:http/http.dart' show get;
 
 void main() => runApp(MyApp());
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Welcome to Flutter',
         theme: ThemeData(primaryColor: Colors.white),
-        home: LoginScreen());
+        home: UserNameScreen());
   }
 }
 
