@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample_app/repository/github_repos_repository.dart';
 import 'package:flutter_sample_app/screens/github_repo_page.dart';
 import 'package:http/http.dart' as http;
 
@@ -160,6 +161,8 @@ class UserNameScreenState extends State<UserNameScreen>
           builder: (context) => GithubRepoListPage(
                 client: client,
                 userName: userName,
+                githubRepoRepository:
+                    GithubReposRepository(userName: userName, perPageLimit: 10),
               )),
     );
   }

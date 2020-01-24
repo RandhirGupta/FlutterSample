@@ -1,21 +1,26 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample_app/models/github_repos.dart';
+import 'package:flutter_sample_app/repository/repos_repository.dart';
 import 'package:http/http.dart' as http;
+
+const int FIRST_PAGE = 1;
 
 class GithubRepoListPage extends StatelessWidget {
   final http.Client client;
   final String userName;
 
-  GithubRepoListPage({Key key, this.client, this.userName}) : super(key: key);
+  final ReposRepository githubRepoRepository;
+
+  GithubRepoListPage(
+      {Key key, this.client, this.userName, this.githubRepoRepository})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<List<GithubRepos>>(
-        future: _fetchUserRepos(client, userName),
+        future: githubRepoRepository.fetchRepos(FIRST_PAGE),
         builder: (context, snapshot) {
           if (snapshot.hasError) print(snapshot.error);
 
@@ -30,30 +35,17 @@ class GithubRepoListPage extends StatelessWidget {
       ),
     );
   }
-
-  Future<List<GithubRepos>> _fetchUserRepos(
-      http.Client client, String userName) async {
-    var userRepos =
-        await client.get('https://api.github.com/users/$userName/repos');
-
-    return _parseUserRepos(userRepos.body);
-  }
-
-  Future<List<GithubRepos>> _parseUserRepos(String responseBody) async {
-    final parsedResponse =
-        json.decode(responseBody).cast<Map<String, dynamic>>();
-
-    return parsedResponse
-        .map<GithubRepos>((json) => GithubRepos.fromJson(json))
-        .toList();
-  }
 }
 
 class GithubRepoList extends StatelessWidget {
   final List<GithubRepos> githubRepos;
   final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
+  final int currentPage;
+  final ReposRepository githubReposRepository;
 
-  GithubRepoList({Key key, this.githubRepos}) : super(key: key);
+  GithubRepoList(
+      {Key key, this.githubRepos, this.currentPage, this.githubReposRepository})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
