@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample_app/models/github_repos.dart';
 import 'package:http/http.dart' as http;
-import 'package:isolate/isolate.dart';
 
 class GithubRepoListPage extends StatelessWidget {
   final http.Client client;
@@ -34,18 +33,15 @@ class GithubRepoListPage extends StatelessWidget {
 
   Future<List<GithubRepos>> _fetchUserRepos(
       http.Client client, String userName) async {
-    final runner = await IsolateRunner.spawn();
-    return runner
-        .run(_parseUserRepos, client)
-        .whenComplete(() => runner.close());
+    var userRepos =
+        await client.get('https://api.github.com/users/$userName/repos');
+
+    return _parseUserRepos(userRepos.body);
   }
 
-  Future<List<GithubRepos>> _parseUserRepos(http.Client client) async {
-    var userRepos =
-        await client.get('https:/>/api.github.com/users/RandhirGupta/repos');
-
+  Future<List<GithubRepos>> _parseUserRepos(String responseBody) async {
     final parsedResponse =
-        json.decode(userRepos.body).cast<Map<String, dynamic>>();
+        json.decode(responseBody).cast<Map<String, dynamic>>();
 
     return parsedResponse
         .map<GithubRepos>((json) => GithubRepos.fromJson(json))
@@ -71,6 +67,7 @@ class GithubRepoList extends StatelessWidget {
 
   Widget _buildGithubRepos() {
     return ListView.builder(
+        itemCount: githubRepos.length,
         padding: const EdgeInsets.all(16.0),
         itemBuilder: (context, i) {
           return _buildRepoRow(githubRepos[i]);
@@ -80,7 +77,7 @@ class GithubRepoList extends StatelessWidget {
   Widget _buildRepoRow(GithubRepos githubRepo) {
     return ListTile(
       title: Text(
-        githubRepo.fullName,
+        githubRepo.name,
         style: _biggerFont,
       ),
     );

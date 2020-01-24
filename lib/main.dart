@@ -60,7 +60,6 @@ class RandomWordsState extends State<RandomWords> {
         color: isFavorite ? Colors.red : null,
       ),
       onTap: () {
-        fetchData();
         setState(() {
           if (isFavorite) {
             _favorites.remove(wordPair);
@@ -96,11 +95,6 @@ class RandomWordsState extends State<RandomWords> {
         body: ListView(children: divided),
       );
     }));
-  }
-
-  void fetchData() async {
-    var result = await get('https://jsonplaceholder.typicode.com/photos');
-    print(result.body);
   }
 }
 
