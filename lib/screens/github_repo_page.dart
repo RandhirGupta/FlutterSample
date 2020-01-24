@@ -66,12 +66,16 @@ class GithubRepoList extends StatelessWidget {
   }
 
   Widget _buildGithubRepos() {
-    return ListView.builder(
-        itemCount: githubRepos.length,
-        padding: const EdgeInsets.all(16.0),
-        itemBuilder: (context, i) {
-          return _buildRepoRow(githubRepos[i]);
-        });
+    return ListView.separated(
+      itemBuilder: (context, i) {
+        return _buildRepoRow(githubRepos[i]);
+      },
+      separatorBuilder: (context, index) {
+        return Divider();
+      },
+      itemCount: githubRepos.length,
+      padding: const EdgeInsets.all(16.0),
+    );
   }
 
   Widget _buildRepoRow(GithubRepos githubRepo) {
@@ -80,6 +84,8 @@ class GithubRepoList extends StatelessWidget {
         githubRepo.name,
         style: _biggerFont,
       ),
+      subtitle: Text(githubRepo.description ?? ''),
+      dense: true,
     );
   }
 }
