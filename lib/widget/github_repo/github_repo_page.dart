@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample_app/models/github_repos.dart';
 import 'package:flutter_sample_app/repository/repos_repository.dart';
-import 'package:flutter_sample_app/widget/github_repo_tile.dart';
+import 'package:flutter_sample_app/widget/github_repo/github_repo_tile.dart';
 import 'package:http/http.dart' as http;
 
 const int FIRST_PAGE = 1;

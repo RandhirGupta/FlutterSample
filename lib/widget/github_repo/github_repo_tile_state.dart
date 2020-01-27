@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample_app/models/github_repos.dart';
 import 'package:flutter_sample_app/repository/repos_repository.dart';
-import 'package:flutter_sample_app/widget/github_repo_tile.dart';
+import 'package:flutter_sample_app/widget/github_repo/github_repo_tile.dart';
 
 class GithubRepoTileState extends State<GithubReposPage> {
   final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
