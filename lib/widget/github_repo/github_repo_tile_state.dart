@@ -10,6 +10,7 @@ class GithubRepoTileState extends State<GithubReposPage> {
   final ReposRepository githubReposRepository;
   List<GithubRepos> githubRepos;
   int currentPage;
+  bool isLoading = false;
 
   GithubRepoTileState(this.githubReposRepository);
 
@@ -26,12 +27,14 @@ class GithubRepoTileState extends State<GithubReposPage> {
       onNotification: _onScrollNotification,
       child: ListView.separated(
         itemBuilder: (context, index) {
-          return _buildRepoRow(githubRepos[index]);
+          return (index == githubRepos.length)
+              ? _buildPaginationLoader(isLoading)
+              : _buildRepoRow(githubRepos[index]);
         },
         separatorBuilder: (context, index) {
           return Divider();
         },
-        itemCount: githubRepos.length,
+        itemCount: githubRepos.length + 1,
         padding: const EdgeInsets.all(16.0),
         controller: scrollController,
       ),
@@ -49,9 +52,14 @@ class GithubRepoTileState extends State<GithubReposPage> {
       if (scrollController.position.maxScrollExtent > scrollController.offset &&
           scrollController.position.maxScrollExtent - scrollController.offset <=
               5) {
+        setState(() {
+          isLoading = true;
+        });
+
         githubReposRepository.fetchRepos(currentPage + 1).then((userRepos) {
           currentPage = currentPage + 1;
           setState(() {
+            isLoading = false;
             githubRepos.addAll(userRepos);
           });
         });
@@ -68,6 +76,18 @@ class GithubRepoTileState extends State<GithubReposPage> {
       ),
       subtitle: Text(githubRepo.description ?? ''),
       dense: true,
+    );
+  }
+
+  Widget _buildPaginationLoader(bool isLoading) {
+    return new Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: new Center(
+        child: new Opacity(
+          opacity: isLoading ? 1.0 : 0.0,
+          child: new CircularProgressIndicator(),
+        ),
+      ),
     );
   }
 }
