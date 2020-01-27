@@ -162,7 +162,7 @@ class UserNameScreenState extends State<UserNameScreen>
                 client: client,
                 userName: userName,
                 githubRepoRepository:
-                    GithubReposRepository(userName: userName, perPageLimit: 10),
+                    GithubReposRepository(userName: userName, perPageLimit: 30),
               )),
     );
   }

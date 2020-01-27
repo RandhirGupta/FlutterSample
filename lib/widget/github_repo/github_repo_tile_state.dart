@@ -52,14 +52,14 @@ class GithubRepoTileState extends State<GithubReposPage> {
       if (scrollController.position.maxScrollExtent > scrollController.offset &&
           scrollController.position.maxScrollExtent - scrollController.offset <=
               5) {
-        setState(() {
-          isLoading = true;
-        });
+//        setState(() {
+//          isLoading = true;
+//        });
 
         githubReposRepository.fetchRepos(currentPage + 1).then((userRepos) {
           currentPage = currentPage + 1;
           setState(() {
-            isLoading = false;
+//            isLoading = false;
             githubRepos.addAll(userRepos);
           });
         });
