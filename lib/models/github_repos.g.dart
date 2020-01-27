@@ -6,8 +6,8 @@ part of 'github_repos.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GithubRepos _$GithubReposFromJson(Map<String, dynamic> json) {
-  return GithubRepos(
+GithubRepo _$GithubReposFromJson(Map<String, dynamic> json) {
+  return GithubRepo(
     id: json['id'] as int,
     nodeId: json['nodeId'] as String,
     name: json['name'] as String,
@@ -88,7 +88,7 @@ GithubRepos _$GithubReposFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$GithubReposToJson(GithubRepos instance) =>
+Map<String, dynamic> _$GithubReposToJson(GithubRepo instance) =>
     <String, dynamic>{
       'id': instance.id,
       'nodeId': instance.nodeId,

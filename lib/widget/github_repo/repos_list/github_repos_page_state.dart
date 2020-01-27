@@ -8,7 +8,7 @@ class GithubReposPageState extends State<GithubReposPage> {
   final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
   final ScrollController scrollController = new ScrollController();
   final ReposRepository githubReposRepository;
-  List<GithubRepos> githubRepos;
+  List<GithubRepo> githubRepos;
   int currentPage;
   bool isLoading = false;
 
@@ -68,7 +68,7 @@ class GithubReposPageState extends State<GithubReposPage> {
     return true;
   }
 
-  Widget _buildRepoRow(GithubRepos githubRepo) {
+  Widget _buildRepoRow(GithubRepo githubRepo) {
     return ListTile(
       title: Text(
         githubRepo.name,

@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'github_repos.g.dart';
 
 @JsonSerializable()
-class GithubRepos {
+class GithubRepo {
   int id;
   String nodeId;
   String name;
@@ -78,7 +78,7 @@ class GithubRepos {
   int watchers;
   String defaultBranch;
 
-  GithubRepos(
+  GithubRepo(
       {this.id,
       this.nodeId,
       this.name,
@@ -153,7 +153,7 @@ class GithubRepos {
       this.watchers,
       this.defaultBranch});
 
-  factory GithubRepos.fromJson(Map<String, dynamic> json) =>
+  factory GithubRepo.fromJson(Map<String, dynamic> json) =>
       _$GithubReposFromJson(json);
 
   Map<String, dynamic> toJson() => _$GithubReposToJson(this);

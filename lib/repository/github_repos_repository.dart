@@ -13,18 +13,18 @@ class GithubReposRepository implements ReposRepository {
   GithubReposRepository({this.userName, this.perPageLimit});
 
   @override
-  Future<List<GithubRepos>> fetchRepos(int pageNumber) async {
+  Future<List<GithubRepo>> fetchRepos(int pageNumber) async {
     http.Response githubRepoResponse = await http.get(GITHUB_BASE_URL +
         "/users/$userName/repos?page=$pageNumber&per_page=$perPageLimit");
     return _parseUserRepos(githubRepoResponse.body);
   }
 
-  Future<List<GithubRepos>> _parseUserRepos(String responseBody) async {
+  Future<List<GithubRepo>> _parseUserRepos(String responseBody) async {
     final parsedResponse =
         json.decode(responseBody).cast<Map<String, dynamic>>();
 
     return parsedResponse
-        .map<GithubRepos>((json) => GithubRepos.fromJson(json))
+        .map<GithubRepo>((json) => GithubRepo.fromJson(json))
         .toList();
   }
 }

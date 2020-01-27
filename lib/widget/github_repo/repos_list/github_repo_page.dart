@@ -23,7 +23,7 @@ class GithubRepoListPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Github repos page'),
       ),
-      body: FutureBuilder<List<GithubRepos>>(
+      body: FutureBuilder<List<GithubRepo>>(
         future: githubRepoRepository.fetchRepos(FIRST_PAGE),
         builder: (context, snapshot) {
           if (snapshot.hasError) print(snapshot.error);
