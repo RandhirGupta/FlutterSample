@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample_app/models/github_repos.dart';
 import 'package:flutter_sample_app/repository/repos_repository.dart';
+import 'package:flutter_sample_app/widget/github_repo/repo_details/github_repo_details_page.dart';
 import 'package:flutter_sample_app/widget/github_repo/repos_list/github_repos_page.dart';
 
 class GithubReposPageState extends State<GithubReposPage> {
@@ -76,6 +77,9 @@ class GithubReposPageState extends State<GithubReposPage> {
       ),
       subtitle: Text(githubRepo.description ?? ''),
       dense: true,
+      onTap: () {
+        _openGithubRepoDetailsPage(githubRepo);
+      },
     );
   }
 
@@ -86,6 +90,17 @@ class GithubReposPageState extends State<GithubReposPage> {
         child: new Opacity(
           opacity: isLoading ? 1.0 : 0.0,
           child: new CircularProgressIndicator(),
+        ),
+      ),
+    );
+  }
+
+  void _openGithubRepoDetailsPage(GithubRepo githubRepo) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => GithubRepoDetailsPage(
+          githubRepo: githubRepo,
         ),
       ),
     );

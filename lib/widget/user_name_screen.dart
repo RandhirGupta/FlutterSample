@@ -158,12 +158,13 @@ class UserNameScreenState extends State<UserNameScreen>
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => GithubRepoListPage(
-                client: client,
-                userName: userName,
-                githubRepoRepository:
-                    GithubReposRepository(userName: userName, perPageLimit: 30),
-              )),
+        builder: (context) => GithubRepoListPage(
+          client: client,
+          userName: userName,
+          githubRepoRepository:
+              GithubReposRepository(userName: userName, perPageLimit: 30),
+        ),
+      ),
     );
   }
 }
