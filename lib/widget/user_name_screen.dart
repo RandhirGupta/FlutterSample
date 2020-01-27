@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample_app/repository/github_repos_repository.dart';
-import 'package:flutter_sample_app/widget/github_repo/github_repo_page.dart';
+import 'package:flutter_sample_app/widget/github_repo/repos_list/github_repo_page.dart';
 import 'package:http/http.dart' as http;
 
 class UserNameScreen extends StatefulWidget {
