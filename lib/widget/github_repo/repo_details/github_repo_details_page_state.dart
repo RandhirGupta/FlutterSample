@@ -34,61 +34,107 @@ class GithubRepoDetailsPageState extends State<GithubRepoDetailsPage> {
 
   Widget _buildTopLayout() {
     return new Container(
-      height: MediaQuery.of(context).size.height,
+      padding: EdgeInsets.all(10.0),
+      margin: EdgeInsets.all(5.0),
       decoration: BoxDecoration(
         color: Colors.white,
+        border: Border.all(
+          color: Colors.grey,
+          width: 0.5,
+          style: BorderStyle.solid,
+        ),
       ),
       child: new Row(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          new Column(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(30.0),
-                child: Center(
-                  child: Icon(
-                    Icons.star_border,
-                    color: Colors.grey,
-                    size: 20,
+          Container(
+            padding: EdgeInsets.all(5.0),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey,
+                width: 0.5,
+                style: BorderStyle.solid,
+              ),
+            ),
+            child: new Column(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.star_border,
+                      color: Colors.grey,
+                      size: 20,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.all(30.0),
-                child: new Text(
-                  githubRepo.watchersCount.toString() ?? '',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.redAccent,
-                    fontSize: 15.0,
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: new Text(
+                    githubRepo.watchersCount.toString() ?? '',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 15.0,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          new Column(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(30.0),
-                child: Center(
-                  child: Icon(
-                    Icons.remove_red_eye,
-                    color: Colors.grey,
-                    size: 20,
+          Container(
+            margin: EdgeInsets.only(left: 5.0),
+            padding: EdgeInsets.all(5.0),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey,
+                width: 0.5,
+                style: BorderStyle.solid,
+              ),
+            ),
+            child: new Column(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.grey,
+                      size: 20,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.all(30.0),
-                child: new Text(
-                  githubRepo.forksCount.toString() ?? '',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.redAccent,
-                    fontSize: 15.0,
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: new Text(
+                    githubRepo.forksCount.toString() ?? '',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 15.0,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
