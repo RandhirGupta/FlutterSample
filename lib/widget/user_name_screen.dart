@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample_app/repository/github_repos_repository.dart';
+import 'package:flutter_sample_app/repository/location_repository/geo_location_repository.dart';
 import 'package:flutter_sample_app/widget/github_repo/repos_list/github_repo_page.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 
 class UserNameScreen extends StatefulWidget {
@@ -33,7 +35,7 @@ class UserNameScreenState extends State<UserNameScreen>
 
   Widget _userNamePage() {
     final userNameController = TextEditingController();
-
+    final GeoLocationRepository geoLocationRepository = GeoLocationRepository();
     return new Container(
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
@@ -48,12 +50,46 @@ class UserNameScreenState extends State<UserNameScreen>
       child: new Column(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.all(120.0),
+            padding: EdgeInsets.all(50.0),
             child: Center(
               child: Icon(
                 Icons.alternate_email,
                 color: Colors.redAccent,
                 size: 50.0,
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(10.0),
+            child: Center(
+              child: FutureBuilder<Position>(
+                future:
+                    geoLocationRepository.fetchPosition(LocationAccuracy.best),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) print(snapshot.error);
+
+                  return snapshot.hasData
+                      ? new Container(
+                          child: new Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: new Text(
+                              "Latitute : " +
+                                  snapshot.data.latitude.toString() +
+                                  "\n" +
+                                  "Longitude : " +
+                                  snapshot.data.longitude.toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                                fontSize: 15.0,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Center(
+                          child: CircularProgressIndicator(),
+                        );
+                },
               ),
             ),
           ),
