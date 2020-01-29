@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample_app/models/github_repos.dart';
 import 'package:flutter_sample_app/repository/repos_repository.dart';
-import 'package:flutter_sample_app/widget/github_repo/repo_details/github_repo_details_page.dart';
+import 'package:flutter_sample_app/widget/github_repo/repo_details/collapsing_toolbar/collapsing_toolbar.dart';
 import 'package:flutter_sample_app/widget/github_repo/repos_list/github_repos_page.dart';
 
 class GithubReposPageState extends State<GithubReposPage> {
@@ -99,7 +99,7 @@ class GithubReposPageState extends State<GithubReposPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => GithubRepoDetailsPage(
+        builder: (context) => CollapsingToolbar(
           githubRepo: githubRepo,
         ),
       ),

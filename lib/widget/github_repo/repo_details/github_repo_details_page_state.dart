@@ -16,9 +16,6 @@ class GithubRepoDetailsPageState extends State<GithubRepoDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Github repo details"),
-      ),
       body: SingleChildScrollView(
         reverse: true,
         child: Padding(
